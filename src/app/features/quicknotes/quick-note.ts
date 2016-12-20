@@ -1,7 +1,11 @@
 import {JotBot} from '../../shared/jotbot';
 
 export class QuickNote extends JotBot {
-    constructor(id:number, name: string) {
-        super(id, name);
+    note: string;
+
+    constructor(id:number, note: string) {
+        super(id, 'quick-note');
+
+        this.note = note;
     }
 }
