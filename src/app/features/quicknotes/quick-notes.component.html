@@ -1,3 +1,20 @@
 <section>
     <h2>{{sectionTitle}}</h2>
+    <button type="button" class="btn btn-primary" (click)="add()" *ngIf="!showForm">Add note</button>
+    <form #f="ngForm" (ngSubmit)="save(f.form)" *ngIf="showForm">
+        <div class="form-group">
+            <label for="note">Note</label>
+            <input type="text" class="form-control" name="note" ngModel #note="ngModel" required minlength="5" />
+            <div *ngIf="note.touched && note.errors">
+                <div *ngIf="note.errors.required" class="alert alert-warning">
+                    Quick note required.
+                </div>
+                <div *ngIf="note.errors.minlength" class="alert alert-warning">
+                    Quick note should be minimum 5 characters.
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+        <button type="button" class="btn btn-default" (click)="showForm = false">Cancel</button>
+    </form>
 </section>

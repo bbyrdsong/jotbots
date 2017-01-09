@@ -4,9 +4,8 @@ export class JotBot {
     createdDate: string;
     modifiedDate: string;
 
-    constructor(id: number, name: string) {
+    constructor(name: string) {
         this.name = name;
-        this.id = id;
-        this.createdDate = new Date().toLocaleString();
+        this.id = 0;
     }
 }
