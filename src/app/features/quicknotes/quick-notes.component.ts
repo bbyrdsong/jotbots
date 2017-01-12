@@ -7,13 +7,14 @@ import { FormGroup, FormControl } from '@angular/forms';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'quick-notes',
-    templateUrl: './quick-notes.component.html'
+    templateUrl: './quick-notes.component.html',
+    styleUrls: ['./quick-notes.component.css']
 })
 export class QuickNotesComponent implements OnInit {
     tableUrl: string = 'quicknotes';
     sectionTitle: string = 'Quick Notes';
     quicknotes: QuickNote[];
-    selectedQuickNote: QuickNote;
+    model: QuickNote;
     showForm: boolean = false;
 
     constructor(private _db: LocalDbService) { }
@@ -26,23 +27,31 @@ export class QuickNotesComponent implements OnInit {
         this.quicknotes = this._db.get(this.tableUrl);
     }
 
-    save(form: FormGroup): void {
+    save(form: FormGroup, event: Event): void {
+        event.preventDefault();
         let quicknote = form.value;
-        this.selectedQuickNote.note = quicknote.note;
+        this.model.note = quicknote.note;
 
-        console.log(form);
-
-        this._db.save(this.tableUrl, this.selectedQuickNote);
+        this._db.save(this.tableUrl, this.model);
 
         this.get();
+        this.showForm = false;
     }
 
     add(): void {
-        this.selectedQuickNote = new QuickNote('');
+        this.model = new QuickNote('', '');
         this.showForm = true;
     }
 
-    edit(quicknote: QuickNote): void {
-        this.selectedQuickNote = quicknote;
+    edit(quicknote: QuickNote, event: Event): void {
+        event.preventDefault();
+        this.model = quicknote;
+        this.showForm = true;
+    }
+
+    delete(quicknote: QuickNote, event: Event): void {
+        event.preventDefault();
+        this._db.delete(this.tableUrl, quicknote.id);
+        this.get();
     }
 }

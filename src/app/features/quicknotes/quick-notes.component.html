@@ -1,20 +1,34 @@
-<section>
+<section class="container">
     <h2>{{sectionTitle}}</h2>
     <button type="button" class="btn btn-primary" (click)="add()" *ngIf="!showForm">Add note</button>
-    <form #f="ngForm" (ngSubmit)="save(f.form)" *ngIf="showForm">
-        <div class="form-group">
-            <label for="note">Note</label>
-            <input type="text" class="form-control" name="note" ngModel #note="ngModel" required minlength="5" />
-            <div *ngIf="note.touched && note.errors">
-                <div *ngIf="note.errors.required" class="alert alert-warning">
-                    Quick note required.
-                </div>
-                <div *ngIf="note.errors.minlength" class="alert alert-warning">
-                    Quick note should be minimum 5 characters.
+    <form #f="ngForm" (ngSubmit)="save(f, $event)" *ngIf="showForm">
+        <fieldset class="col-md-3">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" [(ngModel)]="model.name" #name="ngModel" required maxlength="12" />
+            </div>
+            <div class="form-group">
+                <label for="note">Note</label>
+                <textarea class="form-control" id="note" name="note" [(ngModel)]="model.note" #note="ngModel" required minlength="5"></textarea>
+                <div *ngIf="note.touched && note.errors">
+                    <div *ngIf="note.errors.required" class="alert alert-warning">
+                        Quick note required.
+                    </div>
+                    <div *ngIf="note.errors.minlength" class="alert alert-warning">
+                        Quick note should be minimum 5 characters.
+                    </div>
                 </div>
             </div>
-        </div>
-        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
-        <button type="button" class="btn btn-default" (click)="showForm = false">Cancel</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Submit</button>
+            <button type="button" class="btn btn-default" (click)="showForm = false">Cancel</button>
+        </fieldset>
     </form>
+    <section class="row">
+        <div class="quicknote-card" *ngFor="let note of quicknotes">
+            <a href="#" (click)="edit(note, $event)">edit</a>
+            <a href="#" class="pull-right" (click)="delete(note, $event)">x</a>
+            <h4>{{note.name}}</h4>
+            <div class="body">{{note.note}}</div>
+        </div>
+    </section>
 </section>

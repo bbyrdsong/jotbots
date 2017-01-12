@@ -1,3 +1,4 @@
+import { QuickNote } from './../features/quicknotes/quick-note';
 import { Injectable } from '@angular/core';
 import { IDataService } from './../shared/idataservice';
 
@@ -39,14 +40,15 @@ export class LocalDbService implements IDataService {
         } else {
             storedItem = item;
             storedItem.createdDate = new Date().toLocaleString();
-            let maxItem = this._db[tableUrl].reduce((prev, curr) => {
+
+            let maxItem = this._db[tableUrl].length > 0 ? this._db[tableUrl].reduce((prev, curr) => {
                 if (curr.id > prev.id) {
                     return curr;
                 } else {
                     return prev;
                 }
-            });
-            storedItem.id = maxItem ? maxItem.id + 1 : 1;
+            }) : { id: 0 };
+            storedItem.id = maxItem.id + 1;
             this._db[tableUrl].push(storedItem);
         }
 
@@ -56,8 +58,7 @@ export class LocalDbService implements IDataService {
     }
 
     delete(tableUrl: string, id: number): void {
-        let storedItem = this._db[tableUrl].find(i => i.id === id);
-        let idx = this._db[tableUrl].findIndex(storedItem);
+        let idx = this._db[tableUrl].findIndex(note => note.id === id);
         this._db[tableUrl].splice(idx, 1);
 
         this.saveDbToStorage();

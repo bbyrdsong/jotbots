@@ -1,11 +1,13 @@
-import {JotBot} from '../../shared/jotbot';
+export class QuickNote {
 
-export class QuickNote extends JotBot {
-    note: string;
+    id: number;
+    createdDate: string;
+    modifiedDate: string;
 
-    constructor(note: string) {
-        super('quick-note');
-
-        this.note = note;
+    constructor(
+        public name: string,
+        public note: string
+    ) {
+        this.createdDate = new Date().toLocaleString();
     }
 }
