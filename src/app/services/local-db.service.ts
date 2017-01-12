@@ -1,10 +1,10 @@
 import { QuickNote } from './../features/quicknotes/quick-note';
 import { Injectable } from '@angular/core';
-import { IDataService } from './../shared/idataservice';
 
 @Injectable()
-export class LocalDbService implements IDataService {
+export class LocalDbService {
     private _db: any;
+    private _tbl: string;
 
     constructor() {
         let jotbots = window.localStorage.getItem('jotbots');
@@ -19,16 +19,20 @@ export class LocalDbService implements IDataService {
         window.localStorage.setItem('jotbots', JSON.stringify(this._db));
     }
 
-    get(tableUrl: string): any[] {
-        return this._db[tableUrl];
+    setTable(tableUrl: string) {
+        this._tbl = tableUrl;
     }
 
-    getItem(tableUrl: string, id: number): any {
-        return this._db[tableUrl].find(item => item.id === id);
+    get(): any[] {
+        return this._db[this._tbl];
     }
 
-    save(tableUrl: string, item: any): any {
-        let storedItem = this._db[tableUrl].find(i => i.id === item.id);
+    getItem(id: number): any {
+        return this._db[this._tbl].find(item => item.id === id);
+    }
+
+    save(item: any): any {
+        let storedItem = this._db[this._tbl].find(i => i.id === item.id);
 
         if (storedItem) { // update
             for (let prop in item) {
@@ -41,7 +45,7 @@ export class LocalDbService implements IDataService {
             storedItem = item;
             storedItem.createdDate = new Date().toLocaleString();
 
-            let maxItem = this._db[tableUrl].length > 0 ? this._db[tableUrl].reduce((prev, curr) => {
+            let maxItem = this._db[this._tbl].length > 0 ? this._db[this._tbl].reduce((prev, curr) => {
                 if (curr.id > prev.id) {
                     return curr;
                 } else {
@@ -49,7 +53,7 @@ export class LocalDbService implements IDataService {
                 }
             }) : { id: 0 };
             storedItem.id = maxItem.id + 1;
-            this._db[tableUrl].push(storedItem);
+            this._db[this._tbl].push(storedItem);
         }
 
         this.saveDbToStorage();
@@ -57,9 +61,9 @@ export class LocalDbService implements IDataService {
         return storedItem;
     }
 
-    delete(tableUrl: string, id: number): void {
-        let idx = this._db[tableUrl].findIndex(note => note.id === id);
-        this._db[tableUrl].splice(idx, 1);
+    delete(id: number): void {
+        let idx = this._db[this._tbl].findIndex(note => note.id === id);
+        this._db[this._tbl].splice(idx, 1);
 
         this.saveDbToStorage();
     }

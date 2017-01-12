@@ -17,14 +17,16 @@ export class QuickNotesComponent implements OnInit {
     model: QuickNote;
     showForm: boolean = false;
 
-    constructor(private _db: LocalDbService) { }
+    constructor(private _db: LocalDbService) {
+        _db.setTable(this.tableUrl);
+    }
 
     ngOnInit() {
         this.get();
     }
 
     get(): void {
-        this.quicknotes = this._db.get(this.tableUrl);
+        this.quicknotes = this._db.get();
     }
 
     save(form: FormGroup, event: Event): void {
@@ -32,7 +34,7 @@ export class QuickNotesComponent implements OnInit {
         let quicknote = form.value;
         this.model.note = quicknote.note;
 
-        this._db.save(this.tableUrl, this.model);
+        this._db.save(this.model);
 
         this.get();
         this.showForm = false;
@@ -51,7 +53,7 @@ export class QuickNotesComponent implements OnInit {
 
     delete(quicknote: QuickNote, event: Event): void {
         event.preventDefault();
-        this._db.delete(this.tableUrl, quicknote.id);
+        this._db.delete(quicknote.id);
         this.get();
     }
 }
