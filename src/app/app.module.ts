@@ -1,3 +1,4 @@
+import { FilterPipe } from './shared/filter.pipe';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -23,7 +24,8 @@ import { QuickNotesComponent } from './features/quicknotes/quick-notes.component
   ],
   declarations: [
     AppComponent,
-    QuickNotesComponent
+    QuickNotesComponent,
+    FilterPipe
   ],
   providers: [
     LocalDbService
