@@ -17,7 +17,6 @@
 }
 
 .quicknote-card .body {
-    overflow: auto;
     height: 100px;
     margin-top: 0;
     font-size: 10pt;
@@ -25,4 +24,23 @@
 
 .quicknote-card a {
     margin-top: 0;
+}
+
+.scrollable {
+    overflow-y: scroll;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #c9c6bc;
+}
+
+.scrollable::-webkit-scrollbar {
+    width: 8px;
+    background-color: #F5F5F5;
+}
+
+.scrollable::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #efede5;
 }

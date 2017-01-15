@@ -7,6 +7,6 @@ export class FilterPipe implements PipeTransform {
             return arr;
         }
 
-        return arr.filter(val => val['name'].toLowerCase().indexOf(args[0].toLowerCase()) > 0);
+        return arr.filter(val => val['name'].toLowerCase().includes(args[0]));
     }
 }
