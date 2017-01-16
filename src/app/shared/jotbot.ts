@@ -1,11 +1,12 @@
-export class JotBot {
-    id: number;
-    name: string;
-    createdDate: string;
-    modifiedDate: string;
+import { BaseModel } from './repository-pattern';
 
-    constructor(name: string) {
+export class JotBot extends BaseModel {
+    name: string;
+    description: string;
+
+    constructor(name: string, description: string) {
+        super();
         this.name = name;
-        this.id = 0;
+        this.description = description;
     }
 }

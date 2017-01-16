@@ -1,6 +1,5 @@
 export class BaseModel {
     id: number;
-    name: string;
     createdDate: Date;
     modifiedDate: Date;
 }
@@ -40,6 +39,7 @@ export class Repository<T extends BaseModel> implements IRepository<T> {
         if (!model) {
             throw new Error(this.UNDEFINED_ERROR);
         }
+        model.createdDate = new Date();
         this.dbSet.push(model);
         this.context.saveChanges();
     }

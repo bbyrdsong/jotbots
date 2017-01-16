@@ -1,6 +1,5 @@
 import { LocalDbService } from './../../services/local-db.service';
 import { QuickNote } from './quick-note';
-import { IDataService } from './../../shared/idataservice';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 
@@ -32,7 +31,7 @@ export class QuickNotesComponent implements OnInit {
     save(form: FormGroup, event: Event): void {
         event.preventDefault();
         let quicknote = form.value;
-        this.model.note = quicknote.note;
+        this.model.description = quicknote.description;
 
         this._db.save(this.model);
 
