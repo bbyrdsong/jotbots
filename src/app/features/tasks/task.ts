@@ -1,11 +1,9 @@
-export class Task {
-    id: number;
-    createdDate: string;
-    modifiedDate: string;
+import { JotBot } from './../../shared/jotbot';
+export class Task extends JotBot {
 
-    constructor(public name: string,
-        public description: string,
+    constructor(name: string,
+        description: string,
         public dueDate: Date) {
-            this.createdDate = new Date().toLocaleString();
+            super(name, description);
         }
 }
