@@ -4,7 +4,7 @@ export class QuickNote extends JotBot {
 
     constructor(
         public name: string,
-        public note: string
+        private note: string
     ) {
         super(name, note);
     }

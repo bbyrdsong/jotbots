@@ -1,7 +1,7 @@
-import { LocalDbService } from './../../services/local-db.service';
+import { BaseComponent } from './../../shared/base-component';
+import { LocalStorageUnitOfWork } from './../../services/unit-of-work.service';
 import { QuickNote } from './quick-note';
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -9,50 +9,10 @@ import { FormGroup, FormControl } from '@angular/forms';
     templateUrl: './quick-notes.component.html',
     styleUrls: ['./quick-notes.component.css']
 })
-export class QuickNotesComponent implements OnInit {
-    tableUrl: string = 'quicknotes';
-    sectionTitle: string = 'Quick Notes';
-    quicknotes: QuickNote[];
-    model: QuickNote;
-    showForm: boolean = false;
+export class QuickNotesComponent extends BaseComponent<QuickNote>  {
 
-    constructor(private _db: LocalDbService) {
-        _db.setTable(this.tableUrl);
+    constructor(uow: LocalStorageUnitOfWork) {
+        super(uow, 'quicknotes', 'Quick Notes');
     }
 
-    ngOnInit() {
-        this.get();
-    }
-
-    get(): void {
-        this.quicknotes = this._db.get();
-    }
-
-    save(form: FormGroup, event: Event): void {
-        event.preventDefault();
-        let quicknote = form.value;
-        this.model.description = quicknote.description;
-
-        this._db.save(this.model);
-
-        this.get();
-        this.showForm = false;
-    }
-
-    add(): void {
-        this.model = new QuickNote('', '');
-        this.showForm = true;
-    }
-
-    edit(quicknote: QuickNote, event: Event): void {
-        event.preventDefault();
-        this.model = quicknote;
-        this.showForm = true;
-    }
-
-    delete(quicknote: QuickNote, event: Event): void {
-        event.preventDefault();
-        this._db.delete(quicknote.id);
-        this.get();
-    }
 }

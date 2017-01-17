@@ -1,3 +1,7 @@
+import { QuickNote } from './../features/quicknotes/quick-note';
+import { IContext, IRepository } from './repository-pattern';
+import { Injectable } from '@angular/core';
+
 export class BaseModel {
     id: number;
     createdDate: Date;
@@ -12,19 +16,24 @@ export interface IRepository<T extends BaseModel> {
     delete(id: number): void;
 }
 
-export interface IContext<T> {
-    set(): T[];
+export interface IContext {
+    set(tableName: string): any[];
     saveChanges(): void;
+}
+
+export interface IUnitOfWork {
+    context: IContext;
+    quicknotes: IRepository<QuickNote>;
 }
 
 export class Repository<T extends BaseModel> implements IRepository<T> {
     private UNDEFINED_ERROR: string = 'model is undefined';
-    private context: IContext<T>;
+    private context: IContext;
     private dbSet: T[];
 
-    constructor(context: IContext<T>) {
+    constructor(context: IContext, tableName: string) {
         this.context = context;
-        this.dbSet = context.set();
+        this.dbSet = context.set(tableName);
     }
 
     getAll(): T[] {

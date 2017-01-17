@@ -1,12 +1,13 @@
-import { FilterPipe } from './shared/filter.pipe';
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { LocalDbService } from './services/local-db.service';
-
+import { JotBotLocalStorageDb } from './services/local-db-context.service';
+import { LocalStorageUnitOfWork } from './services/unit-of-work.service';
+import { FilterPipe } from './shared/filter.pipe';
 import { AppComponent } from './app.component';
 import { QuickNotesComponent } from './features/quicknotes/quick-notes.component';
 
@@ -28,7 +29,8 @@ import { QuickNotesComponent } from './features/quicknotes/quick-notes.component
     FilterPipe
   ],
   providers: [
-    LocalDbService
+    JotBotLocalStorageDb,
+    LocalStorageUnitOfWork
   ],
   bootstrap: [AppComponent]
 })
