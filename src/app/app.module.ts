@@ -1,3 +1,5 @@
+import { TaskComponent } from './features/tasks/task.component';
+import { HomeComponent } from './features/home/home.component';
 import { TasksComponent } from './features/tasks/tasks.component';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -26,6 +28,10 @@ import { QuickNotesComponent } from './features/quicknotes/quick-notes.component
       {
         path: 'tasks',
         component: TasksComponent
+      },
+      {
+        path: '**',
+        component: HomeComponent
       }
     ])
   ],
@@ -33,6 +39,8 @@ import { QuickNotesComponent } from './features/quicknotes/quick-notes.component
     AppComponent,
     QuickNotesComponent,
     TasksComponent,
+    TaskComponent,
+    HomeComponent,
     FilterPipe
   ],
   providers: [

@@ -51,20 +51,11 @@
 
     <section class="row">
         <div class="col-md-12">
-            <table class="table table-bordered">
-                <thead>
-                    <th>Task</th>
-                    <th>Due date</th>
-                    <th>Description</th>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let task of dbSet | filter: filter">
-                        <td class="col-md-3">{{task.name}}</td>
-                        <td class="col-md-2">{{task.dueDate | date: 'MM/dd/yyyy HH:mm'}} </td>
-                        <td class="col-md-7">{{task.description}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <ul *ngFor="let task of dbSet | filter: filter">
+                <li>
+                    <jb-task [task]="task"></jb-task>
+                </li>
+            </ul>
         </div>
     </section>
 </section>

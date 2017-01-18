@@ -42,6 +42,10 @@
     /* red */
 }
 
+.row {
+    margin-top: 10px;
+}
+
 @media screen and (min-width: 600px) {
     .nav li {
         width: 150px;
