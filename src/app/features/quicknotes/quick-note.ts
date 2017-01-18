@@ -1,4 +1,4 @@
-import { JotBot } from './../../shared/jotbot';
+import { JotBot } from './../../lib/jotbot';
 
 export class QuickNote extends JotBot {
 

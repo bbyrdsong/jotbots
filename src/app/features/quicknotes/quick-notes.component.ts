@@ -1,4 +1,4 @@
-import { BaseComponent } from './../../shared/base-component';
+import { BaseComponent } from './../../lib/base-component';
 import { LocalStorageUnitOfWork } from './../../services/unit-of-work.service';
 import { QuickNote } from './quick-note';
 import { Component, OnInit } from '@angular/core';

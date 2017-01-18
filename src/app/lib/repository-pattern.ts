@@ -17,7 +17,7 @@ export interface IRepository<T extends BaseModel> {
 }
 
 export interface IContext {
-    set(tableName: string): any[];
+    set(tableName?: string): any[];
     saveChanges(): void;
 }
 

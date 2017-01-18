@@ -1,4 +1,5 @@
-import { JotBot } from './../../shared/jotbot';
+import { JotBot } from './../../lib/jotbot';
+
 export class Task extends JotBot {
 
     constructor(name: string,

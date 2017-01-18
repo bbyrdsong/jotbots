@@ -1,4 +1,4 @@
-import { IUnitOfWork } from './../shared/repository-pattern';
+import { IUnitOfWork } from './../lib/repository-pattern';
 import { Injectable } from '@angular/core';
 
 import { JotBotLocalStorageDb } from './local-db-context.service';
