@@ -1,3 +1,4 @@
+import { TasksComponent } from './features/tasks/tasks.component';
 
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
@@ -21,12 +22,17 @@ import { QuickNotesComponent } from './features/quicknotes/quick-notes.component
       {
         path: 'quicknotes',
         component: QuickNotesComponent
+      },
+      {
+        path: 'tasks',
+        component: TasksComponent
       }
     ])
   ],
   declarations: [
     AppComponent,
     QuickNotesComponent,
+    TasksComponent,
     FilterPipe
   ],
   providers: [

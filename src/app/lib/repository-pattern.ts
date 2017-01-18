@@ -1,3 +1,4 @@
+import { Task } from './../features/tasks/task';
 import { QuickNote } from './../features/quicknotes/quick-note';
 import { IContext, IRepository } from './repository-pattern';
 import { Injectable } from '@angular/core';
@@ -24,6 +25,7 @@ export interface IContext {
 export interface IUnitOfWork {
     context: IContext;
     quicknotes: IRepository<QuickNote>;
+    tasks: IRepository<Task>;
 }
 
 export class Repository<T extends BaseModel> implements IRepository<T> {

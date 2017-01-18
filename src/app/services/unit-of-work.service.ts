@@ -1,3 +1,4 @@
+import { TaskRepository } from './../features/tasks/tasks.respository';
 import { IUnitOfWork } from './../lib/repository-pattern';
 import { Injectable } from '@angular/core';
 
@@ -8,6 +9,7 @@ import { QuickNoteRepository } from './../features/quicknotes/quick-notes.respos
 export class LocalStorageUnitOfWork implements IUnitOfWork {
     context: JotBotLocalStorageDb;
     public quicknotes: QuickNoteRepository;
+    public tasks: TaskRepository;
 
     constructor(context: JotBotLocalStorageDb) {
         this.context = context;
@@ -16,5 +18,6 @@ export class LocalStorageUnitOfWork implements IUnitOfWork {
 
     init(): void {
         this.quicknotes = new QuickNoteRepository(this.context, 'quicknotes');
+        this.tasks = new TaskRepository(this.context, 'tasks');
     }
 }

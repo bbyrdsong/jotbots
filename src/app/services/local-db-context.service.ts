@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IContext } from './../shared/repository-pattern';
+import { IContext } from './../lib/repository-pattern';
 
 @Injectable()
 export class JotBotLocalStorageDb implements IContext {
