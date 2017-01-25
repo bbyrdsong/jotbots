@@ -1,7 +1,3 @@
-import { TaskComponent } from './features/tasks/task.component';
-import { HomeComponent } from './features/home/home.component';
-import { TasksComponent } from './features/tasks/tasks.component';
-
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -14,6 +10,10 @@ import { FilterPipe } from './shared/filter.pipe';
 
 import { AppComponent } from './app.component';
 import { QuickNotesComponent } from './features/quicknotes/quick-notes.component';
+import { TaskComponent } from './features/tasks/task.component';
+import { HomeComponent } from './features/home/home.component';
+import { TasksComponent } from './features/tasks/tasks.component';
+import { DirectoryComponent } from './features/directory/directory.component';
 
 @NgModule({
   imports: [
@@ -30,6 +30,10 @@ import { QuickNotesComponent } from './features/quicknotes/quick-notes.component
         component: TasksComponent
       },
       {
+        path: 'directory',
+        component: DirectoryComponent
+      },
+      {
         path: '**',
         component: HomeComponent
       }
@@ -41,6 +45,7 @@ import { QuickNotesComponent } from './features/quicknotes/quick-notes.component
     TasksComponent,
     TaskComponent,
     HomeComponent,
+    DirectoryComponent,
     FilterPipe
   ],
   providers: [
