@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
 @Component({
     // tslint:disable-next-line:component-selector
     selector: 'document',
-    templateUrl: './document.component.html'
+    templateUrl: './document.component.html',
+    styleUrls: ['./document.component.css']
 })
 export class DocumentComponent extends BaseComponent<Document>  {
 
@@ -14,4 +15,8 @@ export class DocumentComponent extends BaseComponent<Document>  {
         super(uow, 'notepad', 'Notepad');
     }
 
+    close(): void {
+        this.model = new Document('', '', '');
+        this.get();
+    }
 }

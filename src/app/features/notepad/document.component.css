@@ -1,0 +1,6 @@
+.menu {
+    min-height: 250px;
+    border: 1px solid black;
+    max-height: 350px;
+    overflow: auto;
+}

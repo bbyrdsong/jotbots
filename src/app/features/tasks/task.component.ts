@@ -11,6 +11,10 @@ import { Observable, Subscription } from 'rxjs/Rx';
         <p>Due date: {{task.dueDate | date: 'MM/dd/yyyy HH:mm'}}</p>
         <p>Description: {{task.description}}</p>
         <p>{{report}}</p>
+        <p>
+            <a href="#" (click)="edit(item, $event)">edit</a> |
+            <a href="#" (click)="delete(item, $event)">delete</a>
+        </p>
     </div>
     `
 })
