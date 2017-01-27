@@ -14,6 +14,7 @@ import { TaskComponent } from './features/tasks/task.component';
 import { HomeComponent } from './features/home/home.component';
 import { TasksComponent } from './features/tasks/tasks.component';
 import { DirectoryComponent } from './features/directory/directory.component';
+import { DocumentComponent } from './features/notepad/document.component';
 
 @NgModule({
   imports: [
@@ -34,6 +35,10 @@ import { DirectoryComponent } from './features/directory/directory.component';
         component: DirectoryComponent
       },
       {
+        path: 'notepad',
+        component: DocumentComponent
+      },
+      {
         path: '**',
         component: HomeComponent
       }
@@ -46,6 +51,7 @@ import { DirectoryComponent } from './features/directory/directory.component';
     TaskComponent,
     HomeComponent,
     DirectoryComponent,
+    DocumentComponent,
     FilterPipe
   ],
   providers: [

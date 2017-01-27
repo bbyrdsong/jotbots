@@ -18,6 +18,7 @@ export class BaseComponent<T extends JotBot> implements OnInit {
     }
 
     ngOnInit() {
+        this.model = new JotBot('', '') as T;
         this.get();
     }
 

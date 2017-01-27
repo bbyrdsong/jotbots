@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent extends OnInit {
     sectionTitle: string;
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.sectionTitle = 'Jot Bots';
     }
 }

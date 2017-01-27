@@ -4,7 +4,7 @@ export class Document extends JotBot {
 
     constructor(name: string,
                 description: string,
-                body: string) {
+                public body: string) {
                     super(name, description);
                 }
 }

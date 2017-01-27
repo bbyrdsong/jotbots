@@ -1,0 +1,29 @@
+<section class="container">
+    <h2>{{sectionTitle}}</h2>
+
+    <section class="row">
+        <div class="col-md-12">
+            <div class="pull-right">
+                <button type="button" class="btn btn-primary" (click)="add()">New</button>
+                <button type="button" class="btn btn-danger" (click)="delete(model, $event)">Delete</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="row">
+        <div class="col-md-2">
+            <ul>
+                <li *ngFor="let item of dbSet">
+                    {{item.name}}
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 col-md-offset-1">
+            <form #f="ngForm" (ngSubmit)="save(f, $event)">
+                <input type="text" class="form-control" placeholder="Name" id="nmae" name="name" #name="ngModel" [(ngModel)]="model.name" />
+                <textarea name="body" id="body" [(ngModel)]="model.body" rows="20" class="form-control" #body="ngModel"></textarea>
+                <button type="submit" class="btn btn-success">Save</button>
+            </form>
+        </div>
+    </section>
+</section>
