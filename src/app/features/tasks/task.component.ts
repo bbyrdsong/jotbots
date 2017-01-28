@@ -31,9 +31,11 @@ export class TaskComponent implements OnInit, OnDestroy {
     private timeDiff: number;
 
     ngOnInit(): void {
+        console.log(this.task);
+
         let dt1 = new Date(this.task.dueDate),
             dt2 = new Date();
-        this.timeDiff = dt2.getTime() - dt1.getTime();
+        this.timeDiff = dt1.getTime() - dt2.getTime();
 
         this.timer = Observable.timer(0, this.period);
         this.sub = this.timer.subscribe(tick => this.report = this.convertToCountdown(this.timeDiff - (tick * 1000)));
@@ -44,12 +46,16 @@ export class TaskComponent implements OnInit, OnDestroy {
     }
 
     private convertToCountdown(ms: number): string {
+        if (ms < 0) {
+            return 'due in: time expired';
+        }
+
         let seconds = Math.floor((ms / 1000) % 60),
             minutes = Math.floor((ms / 1000 / 60) % 60),
             hours = Math.floor((ms / (1000 * 60 * 60)) % 24),
             days = Math.floor(ms / (1000 * 60 * 60 * 24));
 
-        return days.toString() + ' days: ' +
+        return 'due in: ' + days.toString() + ' days: ' +
             hours.toString() + ' hours: ' +
             minutes.toString() + ' minutes: ' +
             seconds.toString() + ' seconds';
