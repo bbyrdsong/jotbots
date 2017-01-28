@@ -50,6 +50,14 @@ export class Repository<T extends BaseModel> implements IRepository<T> {
         if (!model) {
             throw new Error(this.UNDEFINED_ERROR);
         }
+
+        let ids = this.dbSet.length > 0 ? this.dbSet.map(function(obj){
+            return obj.id;
+        }) : [0];
+
+        let maxId = (Math.max.apply(null, ids) || 0) + 1;
+
+        model.id = maxId;
         model.createdDate = new Date();
         this.dbSet.push(model);
         this.context.saveChanges();

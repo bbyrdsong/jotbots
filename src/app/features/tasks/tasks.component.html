@@ -51,11 +51,8 @@
 
     <section class="row">
         <div class="col-md-12">
-            <ul *ngFor="let task of dbSet | filter: filter">
-                <li>
-                    <jb-task [task]="task"></jb-task>
-                </li>
-            </ul>
+            <jb-task *ngFor="let task of dbSet | filter: filter" [task]="task" (onEdit)="onEdit($event)" (onDelete)="onDelete($event)">
+            </jb-task>
         </div>
     </section>
 </section>

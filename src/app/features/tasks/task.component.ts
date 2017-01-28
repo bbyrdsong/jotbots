@@ -1,5 +1,5 @@
 import { Task } from './task';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, OnDestroy } from '@angular/core';
 import { Observable, Subscription } from 'rxjs/Rx';
 
 @Component({
@@ -12,14 +12,17 @@ import { Observable, Subscription } from 'rxjs/Rx';
         <p>Description: {{task.description}}</p>
         <p>{{report}}</p>
         <p>
-            <a href="#" (click)="edit(item, $event)">edit</a> |
-            <a href="#" (click)="delete(item, $event)">delete</a>
+            <a href="#" (click)="edit(task, $event)">edit</a> |
+            <a href="#" (click)="delete(task, $event)">delete</a>
         </p>
     </div>
     `
 })
 export class TaskComponent implements OnInit, OnDestroy {
     @Input() task: Task;
+    @Output() onEdit = new EventEmitter<Task>();
+    @Output() onDelete = new EventEmitter<Task>();
+
     ticks: number = 0;
     report: string;
     private timer;
@@ -30,7 +33,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         let dt1 = new Date(this.task.dueDate),
             dt2 = new Date();
-        this.timeDiff = dt1.getTime() - dt2.getTime();
+        this.timeDiff = dt2.getTime() - dt1.getTime();
 
         this.timer = Observable.timer(0, this.period);
         this.sub = this.timer.subscribe(tick => this.report = this.convertToCountdown(this.timeDiff - (tick * 1000)));
@@ -40,7 +43,7 @@ export class TaskComponent implements OnInit, OnDestroy {
         this.sub.unsubscribe();
     }
 
-    convertToCountdown(ms: number): string {
+    private convertToCountdown(ms: number): string {
         let seconds = Math.floor((ms / 1000) % 60),
             minutes = Math.floor((ms / 1000 / 60) % 60),
             hours = Math.floor((ms / (1000 * 60 * 60)) % 24),
@@ -50,5 +53,17 @@ export class TaskComponent implements OnInit, OnDestroy {
             hours.toString() + ' hours: ' +
             minutes.toString() + ' minutes: ' +
             seconds.toString() + ' seconds';
+    }
+
+    edit(model: Task, e: Event): void {
+        e.preventDefault();
+        this.onEdit.emit(model);
+        console.log('child', model);
+    }
+
+    delete(model: Task, e: Event): void {
+        e.preventDefault();
+        this.onDelete.emit(model);
+        console.log('child', model);
     }
 }

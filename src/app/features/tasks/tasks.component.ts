@@ -14,4 +14,12 @@ export class TasksComponent extends BaseComponent<Task>  {
         super(uow, 'tasks', 'Tasks');
     }
 
+    onEdit(model: Task): void {
+        this.edit(model, null);
+    }
+
+    onDelete(model: Task): void {
+        this.delete(model, null);
+    }
+
 }

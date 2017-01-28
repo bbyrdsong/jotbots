@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { Document } from './document';
 import { BaseComponent } from './../../lib/base-component';
 import { LocalStorageUnitOfWork } from './../../services/unit-of-work.service';
@@ -16,7 +17,7 @@ export class DocumentComponent extends BaseComponent<Document>  {
     }
 
     close(): void {
-        this.model = new Document('', '', '');
+        this.model = { name: '', body: '' };
         this.get();
     }
 }

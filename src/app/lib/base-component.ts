@@ -3,12 +3,12 @@ import { JotBot } from './jotbot';
 import { IUnitOfWork } from './repository-pattern';
 import { FormGroup } from '@angular/forms';
 
-export class BaseComponent<T extends JotBot> implements OnInit {
+export class BaseComponent<T extends any> implements OnInit {
     uow: IUnitOfWork;
     tableName: string;
     sectionTitle: string;
-    dbSet: T[];
-    model: T;
+    dbSet: any[];
+    model: any;
     showForm: boolean = false;
 
     constructor(uow: IUnitOfWork, tableName: string, sectionTitle) {
@@ -18,7 +18,7 @@ export class BaseComponent<T extends JotBot> implements OnInit {
     }
 
     ngOnInit() {
-        this.model = new JotBot('', '') as T;
+        this.model = {};
         this.get();
     }
 
@@ -27,10 +27,11 @@ export class BaseComponent<T extends JotBot> implements OnInit {
     }
 
     save(form: FormGroup, event: Event): void {
-        event.preventDefault();
-        let jotbot = form.value;
+        if (event) {
+            event.preventDefault();
+        }
 
-        if (this.model.id > 0) {
+        if (this.model.id) {
             this.uow[this.tableName].update(this.model);
         } else {
             this.uow[this.tableName].insert(this.model);
@@ -41,18 +42,23 @@ export class BaseComponent<T extends JotBot> implements OnInit {
     }
 
     add(): void {
-        this.model = new JotBot('', '') as T;
+        this.model = {};
         this.showForm = true;
     }
 
     edit(model: T, event: Event): void {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
         this.model = model;
         this.showForm = true;
     }
 
     delete(model: T, event: Event): void {
-        event.preventDefault();
+        if (event) {
+            event.preventDefault();
+        }
+
         this.uow[this.tableName].delete(model.id);
         this.get();
     }
