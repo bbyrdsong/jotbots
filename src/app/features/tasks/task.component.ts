@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
     // tslint:disable-next-line:component-selector
     selector: 'jb-task',
     template: `
-    <div>
+    <div [class]="expired ? 'expired' : ''">
         <h3>{{task.name}}</h3>
         <p>Due date: {{task.dueDate | date: 'MM/dd/yyyy HH:mm'}}</p>
         <p>Description: {{task.description}}</p>
@@ -16,7 +16,12 @@ import { Observable, Subscription } from 'rxjs/Rx';
             <a href="#" (click)="delete(task, $event)">delete</a>
         </p>
     </div>
-    `
+    `,
+    styles: [
+        'div { border: 1px solid black; width:350px; margin-top:10px;padding:10px;}',
+        'h3 { margin-top: 0; border-bottom: 1px solid gray; }',
+        '.expired {border: 1px solid red; background-color:pink;}'
+        ]
 })
 export class TaskComponent implements OnInit, OnDestroy {
     @Input() task: Task;
@@ -29,6 +34,7 @@ export class TaskComponent implements OnInit, OnDestroy {
     private period: number = 1000;
     private sub: Subscription;
     private timeDiff: number;
+    expired: boolean = false;
 
     ngOnInit(): void {
         console.log(this.task);
@@ -47,6 +53,7 @@ export class TaskComponent implements OnInit, OnDestroy {
 
     private convertToCountdown(ms: number): string {
         if (ms < 0) {
+            this.expired = true;
             return 'due in: time expired';
         }
 
