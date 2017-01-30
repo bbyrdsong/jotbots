@@ -17,7 +17,7 @@ export class BaseComponent<T extends any> implements OnInit {
         this.sectionTitle = sectionTitle;
     }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.model = {};
         this.get();
     }
