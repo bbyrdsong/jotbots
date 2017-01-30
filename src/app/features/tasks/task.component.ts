@@ -21,7 +21,7 @@ import { Observable, Subscription } from 'rxjs/Rx';
         'div { border: 1px solid black; width:350px; margin-top:10px;padding:10px;}',
         'h3 { margin-top: 0; border-bottom: 1px solid gray; }',
         '.expired {border: 1px solid red; background-color:pink;}'
-        ]
+    ]
 })
 export class TaskComponent implements OnInit, OnDestroy {
     @Input() task: Task;
@@ -37,8 +37,6 @@ export class TaskComponent implements OnInit, OnDestroy {
     expired: boolean = false;
 
     ngOnInit(): void {
-        console.log(this.task);
-
         let dt1 = new Date(this.task.dueDate),
             dt2 = new Date();
         this.timeDiff = dt1.getTime() - dt2.getTime();
@@ -57,6 +55,7 @@ export class TaskComponent implements OnInit, OnDestroy {
             return 'due in: time expired';
         }
 
+        this.expired = false;
         let seconds = Math.floor((ms / 1000) % 60),
             minutes = Math.floor((ms / 1000 / 60) % 60),
             hours = Math.floor((ms / (1000 * 60 * 60)) % 24),
