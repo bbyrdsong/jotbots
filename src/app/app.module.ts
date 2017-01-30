@@ -7,6 +7,7 @@ import { RouterModule } from '@angular/router';
 import { JotBotLocalStorageDb } from './services/local-db-context.service';
 import { LocalStorageUnitOfWork } from './services/unit-of-work.service';
 import { FilterPipe } from './shared/filter.pipe';
+import { SortObjArrByPipe } from './shared/sortObjArrBy.pipe';
 
 import { AppComponent } from './app.component';
 import { QuickNotesComponent } from './features/quicknotes/quick-notes.component';
@@ -52,7 +53,8 @@ import { DocumentComponent } from './features/notepad/document.component';
     HomeComponent,
     DirectoryComponent,
     DocumentComponent,
-    FilterPipe
+    FilterPipe,
+    SortObjArrByPipe
   ],
   providers: [
     JotBotLocalStorageDb,

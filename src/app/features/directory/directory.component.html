@@ -63,7 +63,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let item of dbSet">
+                    <tr *ngFor="let item of (dbSet | sortObjArrBy: 'name' | filter: filter)">
                         <td>
                             <a href="#" (click)="edit(item, $event)">edit</a> |
                             <a href="#" (click)="delete(item, $event)">delete</a>

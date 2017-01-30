@@ -13,7 +13,7 @@
     <section class="row">
         <div class="col-md-3">
             <ul class="menu">
-                <li *ngFor="let item of dbSet">
+                <li *ngFor="let item of (dbSet | sortObjArrBy: 'name' | filter: filter) ">
                     <a href="#" (click)="edit(item, $event)">{{item.name}}</a>
                 </li>
             </ul>
