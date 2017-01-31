@@ -1,3 +1,4 @@
+import { SortObjArrByPipe } from './../../shared/sortObjArrBy.pipe';
 import { FormGroup } from '@angular/forms';
 import { BaseComponent } from './../../lib/base-component';
 import { LocalStorageUnitOfWork } from './../../services/unit-of-work.service';
@@ -22,15 +23,9 @@ export class TasksComponent extends BaseComponent<Task>  {
 
     getSorted(sortBy): void {
         this.dbSet = this.uow[this.tableName].getAll();
-        this.dbSet.sort((a, b) => {
-            if (a[sortBy] < b[sortBy]) {
-                return -1;
-            }
-            if (a[sortBy] > b[sortBy]) {
-                return 1;
-            }
-            return 0;
-        });
+
+        let sort = new SortObjArrByPipe();
+        sort.transform(this.dbSet, 'dueDate');
     }
 
     save(form: FormGroup, event: Event): void {
