@@ -1,20 +1,17 @@
 <header>
-    <a href="#"><img src="../assets/images/cooltext224567854675404.png" title="Jot Bots!" /></a>
-    <div class="nav">
-        <ul>
-            <li>
-                <a routerLink="/tasks"><img src="../assets/images/cooltext224568088243734.png" title="Tasks" /></a>
-            </li>
-            <li>
-                <a routerLink="/quicknotes"><img src="../assets/images/cooltext224567936876805.png" title="Quick Notes" /></a>
-            </li>
-            <li>
-                <a routerLink="/directory"><img src="../assets/images/cooltext224568054241208.png" title="Directory" /></a>
-            </li>
-            <li>
-                <a routerLink="/notepad"><img src="../assets/images/cooltext224568134220846.png" title="Notepad" /></a>
-            </li>
-        </ul>
-    </div>
-    <router-outlet></router-outlet>
+    <section class="logo">
+        <a href="#"><img src="../assets/images/cooltext224567854675404.png" title="Jot Bots!" /></a>
+    </section>
+    <nav>
+        <section>
+            <a routerLink="/home" class="active" routerLinkActive='active'>Home
+            </a><a routerLink="/tasks" routerLinkActive='active'>Task
+            </a><a routerLink="/quicknotes" routerLinkActive='active'>Quick Notes
+            </a><a routerLink="/directory" routerLinkActive='active'>Directory
+            </a><a routerLink="/notepad" routerLinkActive='active'>Notepad</a>
+        </section>
+    </nav>
 </header>
+<section class="container">
+    <router-outlet></router-outlet>
+</section>

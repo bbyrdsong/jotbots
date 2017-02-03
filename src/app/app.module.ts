@@ -23,26 +23,13 @@ import { DocumentComponent } from './features/notepad/document.component';
     FormsModule,
     HttpModule,
     RouterModule.forRoot([
-      {
-        path: 'quicknotes',
-        component: QuickNotesComponent
-      },
-      {
-        path: 'tasks',
-        component: TasksComponent
-      },
-      {
-        path: 'directory',
-        component: DirectoryComponent
-      },
-      {
-        path: 'notepad',
-        component: DocumentComponent
-      },
-      {
-        path: '**',
-        component: HomeComponent
-      }
+      { path: 'home', component: HomeComponent },
+      { path: 'quicknotes', component: QuickNotesComponent },
+      { path: 'tasks', component: TasksComponent },
+      { path: 'directory', component: DirectoryComponent },
+      { path: 'notepad', component: DocumentComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: '**', redirectTo: 'home', pathMatch: 'full' }
     ])
   ],
   declarations: [

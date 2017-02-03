@@ -3,5 +3,9 @@
 body {
     margin: 0;
     padding: 0;
-    background: #ccc;
+    background: #fff;
+    font: normal 14px/18px Candara, Tahoma, Century Gothic;
+}
+.container h2{
+    margin-bottom: 20px;
 }
